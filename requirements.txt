@@ -5,3 +5,5 @@ pytils==0.4.1
 sqlparse==0.4.4
 tzdata==2023.3
 Pillow
+
+python-dotenv~=1.0.0
