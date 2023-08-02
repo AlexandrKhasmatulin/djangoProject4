@@ -6,6 +6,9 @@ from django.views.decorators.cache import cache_page
 from blog.views import BlogListView, BlogCreateView, BlogDetailView, BlogUpdateView, BlogDeleteView
 from catalog.views import contacts, ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, \
     VersionCreateView, VersionUpdateView, ProductDeleteView
+from send_emails import views
+from send_emails.views import smslatters, SmsLetterCreateView, SmsLetterUpdateView, SmsLetterDeleteView, \
+    SmsLetterListView
 
 app_name = 'catalog'
 
@@ -23,4 +26,10 @@ urlpatterns = [
     path('delete/<int:pk>', BlogDeleteView.as_view(), name='delete'),
     path('create_version/', VersionCreateView.as_view(), name='create_version'),
     path('catalog/<int:pk>/edit', VersionUpdateView.as_view(), name='edit_version'),
+    path('', SmsLetterListView.as_view(), name='list_email'),
+    path("create_email/", SmsLetterCreateView.as_view(), name="create_email"),
+    path("edit_email/<int:pk>/", SmsLetterUpdateView.as_view(), name="update_email"),
+    path("delete_email/<int:pk>/", SmsLetterDeleteView.as_view(), name="delete_email"),
+    path('send_email/', views.send_email, name='send_email'),
+    path('index/', views.index, name='index'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

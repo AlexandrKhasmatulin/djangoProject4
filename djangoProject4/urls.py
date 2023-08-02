@@ -27,4 +27,5 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('', BlogListView.as_view(), name='list'),
     path('users/', include('users.urls', namespace='users')),
+    path('send_emails/', include('send_emails.urls', namespace='send_emails')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

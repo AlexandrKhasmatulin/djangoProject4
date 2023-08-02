@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'blog',
     'users',
+    'send_emails',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,4 @@ if CACHE_ENABLED:
         "LOCATION": "redis://127.0.0.1:6379",
                 }
               }
+SECURITY_EMAIL_SENDER = 'valid_email@my_domain.com'
