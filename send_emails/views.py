@@ -12,10 +12,10 @@ from send_emails.forms import SmsLetterForm, SubjectForm
 from send_emails.models import SmsLetter, Mailing, Client
 
 
-class SmsLetterCreateView(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
+class SmsLetterCreateView(CreateView):
     model = SmsLetter
     form_class = SmsLetterForm
-    success_url = reverse_lazy("send_emails:create")
+    success_url = reverse_lazy("send_emails:create_send_email")
 
     def form_valid(self, form):
         if form.is_valid():
@@ -29,14 +29,14 @@ class SmsLetterCreateView(LoginRequiredMixin, CreateView, PermissionRequiredMixi
 class SmsLetterListView(ListView):
     model = SmsLetter
     template_name = "send_emails/smsletter_list.html"
-
+    #permission_required = "latter.view_product"
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
         return queryset
 
 
-class SmsLetterUpdateView(LoginRequiredMixin, UpdateView, PermissionRequiredMixin):
+class SmsLetterUpdateView(UpdateView):
     model = SmsLetter
     fields = ("title", "client","send_time","frequency","status")
     #permission_required = "main.Product.change_product"
@@ -88,10 +88,10 @@ class SmsLetterDetailView(DetailView):
         return self.object
 
 
-class SmsLetterDeleteView(LoginRequiredMixin, DeleteView, PermissionRequiredMixin):
+class SmsLetterDeleteView(DeleteView):
     model = SmsLetter
-    success_url = reverse_lazy("send_emails:list")
-    permission_required = "send_emails.delete_product"
+    success_url = reverse_lazy("send_emails:list_emails")
+    #permission_required = "latter.delete_product"
 
     def test_func(self):
         return self.request.user.is_superuser

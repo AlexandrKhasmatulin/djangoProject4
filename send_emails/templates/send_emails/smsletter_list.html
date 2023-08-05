@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="col-11 mb-5">
-        <a class="btn btn-outline-primary" href="{% url 'send_emails:create' %}">Добавить рассылку</a>
+        <a class="btn btn-outline-primary" href="{% url 'send_emails:create_send_email' %}">Добавить рассылку</a>
         <a class="btn btn-outline-primary" href="{% url 'send_emails:index' %}">Информация по рассылкам</a>
     </div>
 
@@ -31,12 +31,12 @@
                         </button>
                         {% if perms.SmsLetter.delete_product %}
                              <button class="badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis rounded-pill">
-                             <a href="{% url 'send_emails:update' object.pk %}" class='text-black'>Изменить</a>
+                             <a href="{% url 'send_emails:update_send_email' object.pk %}" class='text-black'>Изменить</a>
                         </button>
                         {% endif %}
                         {% if perms.SmsLetter.change_product %}
                             <button class="badge bg-secondary-subtle border border-secondary-subtle text-secondary-emphasis rounded-pill">
-                                <a href="{% url 'send_emails:delete' object.pk %}"
+                                <a href="{% url 'send_emails:delete_send_email' object.pk %}"
                                    class="btn-outline-danger">Удалить</a>
                             </button>
                         {% endif %}
