@@ -14,12 +14,14 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена')
     date_creation = models.CharField(max_length=150, verbose_name='Дата создания')
     date_change = models.CharField(max_length=150, verbose_name='Дата изменения')
+    seller = models.ForeignKey("Seller", on_delete=models.CASCADE, **NULLABLE)
 
     def __str__(self):
         return f'''
         {self.name}, {self.description},
         Категория: {self.category}
         Цена: {self.price}
+        Поставщик: {self.seller}
         '''
 
     class Meta:
@@ -37,7 +39,18 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+class Seller(models.Model):
+    id_name = models.CharField(max_length=100, verbose_name='название поставщика, завода', **NULLABLE)
+    address = models.CharField(max_length=100, verbose_name='адрес поставщика, завода', **NULLABLE)
 
+    def __str__(self):
+        return f'''
+           {self.name}, {self.address},
+           '''
+
+    class Meta:
+        verbose_name = 'Продавец'
+        verbose_name_plural = 'Продавцы'
 
 class Version(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE)

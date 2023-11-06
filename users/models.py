@@ -2,10 +2,12 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 from catalog.models import NULLABLE
 
-
+class UserRoles(models.TextChoices):
+    USER = 'user', _('user')
+    ADMIN = 'admin', _('admin')
 # Create your models here.
 class User(AbstractUser):
     username = None
